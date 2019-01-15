@@ -41,7 +41,7 @@ function getNavAfterFilter(nav,user) {
 	let userAuthModels=user.authModel.map((authModel)=>{
 		return authModel.code
 	})
-	
+
 	const {sections,by}=nav
 	
 	let resultSections=[]
@@ -96,4 +96,5 @@ function getNavAfterFilter(nav,user) {
 	}
 }
 
+console.log(getNavAfterFilter(nav,user))
 // module.exports = navFilter;
