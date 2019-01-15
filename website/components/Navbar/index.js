@@ -11,6 +11,9 @@ import theme from '../../theme';
 
 import { itemsShape } from './utils';
 import Menu from './Menu';
+import { api, documentation, gettingStarted, guides } from '../../data/navigation';
+
+const sections = [gettingStarted, guides, documentation, api];
 
 class Navbar extends Component {
 	constructor (props) {
@@ -49,6 +52,7 @@ class Navbar extends Component {
 							<GithubIcon css={styles.header__linkIcon} />
 							GitHub
 						</a>
+					</div> */}
 					<div css={styles.nav}>
 						{sections.map(s => (
 							<Link key={s.slug} to={s.slug} css={styles.navitem}>
@@ -56,7 +60,6 @@ class Navbar extends Component {
 							</Link>
 						))}
 					</div>
-					*/}
 					<button onClick={() => this.toggleNavMenu(!menuIsOpen)} css={styles.menuButton}>
 						{menuIsOpen
 							? <MenuClose css={styles.menuIcon} />
@@ -64,7 +67,7 @@ class Navbar extends Component {
 					</button>
 				</div>
 				<div css={[styles.menu, menuIsOpen && styles.menu__open]}>
-					<Menu items={this.props.items} pathname={this.props.pathname} />
+					<Menu items={this.props.items} />
 				</div>
 			</aside>
 		);

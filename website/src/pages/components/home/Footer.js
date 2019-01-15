@@ -31,23 +31,19 @@ const styles = {
 	},
 	list_links_item: {
 		display: 'inline-block',
-		paddingLeft: '0.625rem',
-		paddingRight: '0.625rem',
+		paddingLeft: '1.1em',
+		paddingRight: '1.1em',
 	},
 	list_links_anchor: {
 		textDecoration: 'none',
-		color: '#00263e',
-		':hover': {
-			textDecoration: 'underline',
-		},
+		color: theme.color.gray90,
 	},
 	background: {
 		backgroundColor: theme.color.gray05,
-		paddingTop: '3rem',
-		paddingBottom: '3rem',
+		paddingTop: '1em',
+		paddingBottom: '1em',
 		width: '100%',
 		textAlign: 'center',
 		color: theme.color.gray50,
-		fontSize: '0.9rem',
 	},
 };

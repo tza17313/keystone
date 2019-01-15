@@ -67,16 +67,16 @@ const ListView = React.createClass({
 		// When we directly navigate to a list without coming from another client
 		// side routed page before, we need to initialize the list and parse
 		// possibly specified query parameters
-
+		
 		this.props.dispatch(selectList(this.props.params.listId));
-
+		
 		const isNoCreate = this.props.lists.data[this.props.params.listId].nocreate;
 		const shouldOpenCreate = this.props.location.search === '?create';
-
+		
 		this.setState({
 			showCreateForm: (shouldOpenCreate && !isNoCreate) || Keystone.createFormErrors,
 		});
-
+		
 	},
 	componentWillReceiveProps (nextProps) {
 		// We've opened a new list from the client side routing, so initialize
@@ -89,7 +89,7 @@ const ListView = React.createClass({
 	componentWillUnmount () {
 		this.props.dispatch(clearCachedQuery());
 	},
-
+	
 	// ==============================
 	// HEADER
 	// ==============================
@@ -118,7 +118,7 @@ const ListView = React.createClass({
 	},
 	handleSearchClear () {
 		this.props.dispatch(setActiveSearch(''));
-
+		
 		// TODO re-implement focus when ready
 		// findDOMNode(this.refs.listSearchInput).focus();
 	},
@@ -153,7 +153,7 @@ const ListView = React.createClass({
 		const list = this.props.currentList;
 		const itemCount = pluralize(checkedItems, ('* ' + list.singular.toLowerCase()), ('* ' + list.plural.toLowerCase()));
 		const itemIds = Object.keys(checkedItems);
-
+		
 		this.setState({
 			confirmationDialog: {
 				isOpen: true,
@@ -196,7 +196,7 @@ const ListView = React.createClass({
 	renderManagement () {
 		const { checkedItems, manageMode, selectAllItemsLoading } = this.state;
 		const { currentList } = this.props;
-
+		
 		return (
 			<ListManagement
 				checkedItemCount={Object.keys(checkedItems).length}
@@ -215,11 +215,11 @@ const ListView = React.createClass({
 	renderPagination () {
 		const items = this.props.items;
 		if (this.state.manageMode || !items.count) return;
-
+		
 		const list = this.props.currentList;
 		const currentPage = this.props.lists.page.index;
 		const pageSize = this.props.lists.page.size;
-
+		
 		return (
 			<Pagination
 				currentPage={currentPage}
@@ -236,7 +236,7 @@ const ListView = React.createClass({
 	renderHeader () {
 		const items = this.props.items;
 		const { autocreate, nocreate, plural, singular } = this.props.currentList;
-
+		
 		return (
 			<Container style={{ paddingTop: '2em' }}>
 				<ListHeaderTitle
@@ -252,30 +252,30 @@ const ListView = React.createClass({
 					// common
 					dispatch={this.props.dispatch}
 					list={listsByPath[this.props.params.listId]}
-
+					
 					// expand
 					expandIsActive={!this.state.constrainTableWidth}
 					expandOnClick={this.toggleTableWidth}
-
+					
 					// create
 					createIsAvailable={!nocreate}
 					createListName={singular}
 					createOnClick={autocreate
 						? this.createAutocreate
 						: this.openCreateModal}
-
+					
 					// search
 					searchHandleChange={this.updateSearch}
 					searchHandleClear={this.handleSearchClear}
 					searchHandleKeyup={this.handleSearchKey}
 					searchValue={this.props.active.search}
-
+					
 					// filters
 					filtersActive={this.props.active.filters}
 					filtersAvailable={this.props.currentList.columns.filter((col) => (
 						col.field && col.field.hasFilterMethod) || col.type === 'heading'
 					)}
-
+					
 					// columns
 					columnsActive={this.props.active.columns}
 					columnsAvailable={this.props.currentList.columns}
@@ -287,11 +287,11 @@ const ListView = React.createClass({
 			</Container>
 		);
 	},
-
+	
 	// ==============================
 	// TABLE
 	// ==============================
-
+	
 	checkTableItem (item, e) {
 		e.preventDefault();
 		const newCheckedItems = { ...this.state.checkedItems };
@@ -340,9 +340,9 @@ const ListView = React.createClass({
 			this.props.dispatch(deleteItem(item.id));
 			return;
 		}
-
+		
 		e.preventDefault();
-
+		
 		this.setState({
 			confirmationDialog: {
 				isOpen: true,
@@ -374,11 +374,11 @@ const ListView = React.createClass({
 			constrainTableWidth: !this.state.constrainTableWidth,
 		});
 	},
-
+	
 	// ==============================
 	// COMMON
 	// ==============================
-
+	
 	handleSortSelect (path, inverted) {
 		if (inverted) path = '-' + path;
 		this.props.dispatch(setActiveSort(path));
@@ -396,34 +396,34 @@ const ListView = React.createClass({
 	},
 	showBlankState () {
 		return !this.props.loading
-				&& !this.props.items.results.length
-				&& !this.props.active.search
-				&& !this.props.active.filters.length;
+			&& !this.props.items.results.length
+			&& !this.props.active.search
+			&& !this.props.active.filters.length;
 	},
 	renderBlankState () {
 		const { currentList } = this.props;
-
+		
 		if (!this.showBlankState()) return null;
-
+		
 		// create and nav directly to the item view, or open the create modal
 		const onClick = currentList.autocreate
 			? this.createAutocreate
 			: this.openCreateModal;
-
+		
 		// display the button if create allowed
 		const button = !currentList.nocreate ? (
 			<GlyphButton color="success" glyph="plus" position="left" onClick={onClick} data-e2e-list-create-button="no-results">
 				Create {currentList.singular}
 			</GlyphButton>
 		) : null;
-
+		
 		return (
 			<Container>
 				{(this.props.error) ? (
 					<FlashMessages
 						messages={{ error: [{
-							title: "There is a problem with the network, we're trying to reconnect...",
-						}] }}
+								title: "There is a problem with the network, we're trying to reconnect...",
+							}] }}
 					/>
 				) : null}
 				<BlankState heading={`No ${this.props.currentList.plural.toLowerCase()} found...`} style={{ marginTop: 40 }}>
@@ -434,7 +434,7 @@ const ListView = React.createClass({
 	},
 	renderActiveState () {
 		if (this.showBlankState()) return null;
-
+		
 		const containerStyle = {
 			transition: 'max-width 160ms ease-out',
 			msTransition: 'max-width 160ms ease-out',
@@ -458,8 +458,8 @@ const ListView = React.createClass({
 					{(this.props.error) ? (
 						<FlashMessages
 							messages={{ error: [{
-								title: "There is a problem with the network, we're trying to reconnect..",
-							}] }}
+									title: "There is a problem with the network, we're trying to reconnect..",
+								}] }}
 						/>
 					) : null}
 					{(this.props.loading) ? (

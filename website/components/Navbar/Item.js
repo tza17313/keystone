@@ -1,21 +1,20 @@
 import React, { PropTypes } from 'react';
 import Link from 'gatsby-link';
 
-export default function Item ({ title, url, isActive, depth }) {
+export default function Item ({ depth, title, url }) {
 	return (
-		<Link
-			css={[
-				styles.link,
-				styles['depth__' + depth],
-				isActive && styles.linkActive,
-				isActive && depth === 2 && styles.depth__2__active,
-			]}
-			to={url}
-		>
-			{title}
-		</Link>
+		<li css={styles.item} key={url}>
+			<Link
+				onlyActiveOnIndex
+				css={[styles.link, styles[`link__${depth}`]]}
+				activeStyle={styles.link__active}
+				to={url}
+			>
+				{title}
+			</Link>
+		</li>
 	);
-}
+};
 
 Item.propTypes = {
 	depth: PropTypes.number.isRequired,
@@ -25,11 +24,18 @@ Item.propTypes = {
 
 /* eslint quote-props: ["error", "as-needed"] */
 const styles = {
+	// item
+	item: {
+		fontWeight: 300,
+		margin: '0 0 2px',
+		// marginLeft: '20px',
+	},
 	link: {
-		display: 'flex',
-		alignItems: 'center',
+		// borderBottomRightRadius: 3,
+		// borderTopRightRadius: 3,
 		color: 'white',
-		padding: '0.3125rem 1rem',
+		display: 'block',
+		padding: `0.5em 1rem`,
 		textDecoration: 'none',
 		transition: 'opacity 100ms',
 
@@ -37,25 +43,13 @@ const styles = {
 			backgroundColor: 'rgba(255, 255, 255, 0.1)',
 		},
 	},
-	linkActive: {
+	link__active: {
 		backgroundColor: 'rgba(0, 0, 0, 0.15)',
-		fontWeight: '600',
-		':hover': {
-			backgroundColor: 'rgba(0, 0, 0, 0.15)',
-		},
+		opacity: 1,
 	},
 
-	depth__1: {
-		fontSize: '1rem',
-		marginLeft: '1.875rem',
-		marginTop: '0.3125rem',
-	},
-	depth__2: {
-		fontSize: '0.85rem',
-		marginLeft: '2.875rem',
-		borderLeft: '2px solid rgba(255,255,255,0.2)',
-	},
-	depth__2__active: {
-		borderColor: 'rgba(255,255,255,0.8)',
+	// depth
+	link__2: {
+		paddingLeft: '2rem',
 	},
 };

@@ -59,7 +59,7 @@ export default class DocumentLayout extends React.Component {
 
 		return (
 			<div>
-				<Navbar items={this.getNavItems()} pathname={this.props.location.pathname} />
+				<Navbar items={this.getNavItems()} />
 				<Page
 					body={body}
 					editPath={editPath}

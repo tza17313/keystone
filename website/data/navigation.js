@@ -1,26 +1,26 @@
 export const gettingStarted = {
-	section: 'Get started',
+	section: 'Starting',
 	slug: '/getting-started',
 	items: [{
-		label: 'What is Keystone?',
+		label: 'Getting Started',
 		slug: '',
 	}, {
-		label: 'Quick Start (yo keystone)',
+		label: 'Keystone Yeoman Generator',
 		slug: '/yo-generator',
 	}, {
-		section: 'Setting Up From Scratch',
+		section: 'Setting Up',
 		slug: '/setting-up',
 		items: [{
 			label: 'Part 1: Initial Setup',
 			slug: '/part-1',
 		}, {
-			label: 'Part 2: Data Model Setup',
+			label: 'Part 2 - Database Setup',
 			slug: '/part-2',
 		}, {
 			label: 'Part 3: Routing',
 			slug: '/part-3',
 		}, {
-			label: 'Part 4: Adding data from a form',
+			label: 'Part 4 -  Adding data to the database from a form',
 			slug: '/part-4',
 		}],
 	}],
@@ -68,7 +68,7 @@ export const documentation = {
 			slug: '/database-options',
 		}, {
 			label: 'Admin UI Option',
-			slug: '/admin-ui-options',
+			slug: '/server-options',
 		}],
 	}, {
 		section: 'Database',
@@ -121,7 +121,7 @@ export const api = {
 			section: 'Methods',
 			slug: '/methods',
 			items: [{
-				label: 'closeDatabaseConnection()',
+				label: 'openDatabaseConnection()',
 				slug: '/close-database-connection',
 			}, {
 				label: 'createItems()',
@@ -276,7 +276,7 @@ export const api = {
 				label: 'Textarea',
 				slug: '/textarea',
 			}, {
-				label: 'TextArray',
+				label: 'Textarray',
 				slug: '/textarray',
 			}, {
 				label: 'URL',

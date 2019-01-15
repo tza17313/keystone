@@ -1,6 +1,6 @@
 import React from 'react';
 import Field from '../Field';
-import { FormInput } from '../../../admin/client/App/elemental';
+import { GlyphButton, FormInput } from '../../../admin/client/App/elemental';
 
 module.exports = Field.create({
 	displayName: 'URLField',
@@ -15,42 +15,45 @@ module.exports = Field.create({
 		}
 		window.open(href);
 	},
-	renderField () {
-		const { value } = this.props;
+	renderLink () {
+		if (!this.props.value) return null;
+
 		return (
-			<div>
-				<FormInput
-					autoComplete="off"
-					name={this.getInputName(this.props.path)}
-					onChange={this.valueChanged}
-					ref="focusTarget"
-					type="url"
-					value={value}
-				/>
-				{ this.renderThumb() }
+			<GlyphButton
+				className="keystone-relational-button"
+				glyph="link"
+				onClick={this.openValue}
+				title={'Open ' + this.props.value + ' in a new tab'}
+				variant="link"
+			/>
+		);
+	},
+	renderField () {
+		return (
+			<FormInput
+				autoComplete="off"
+				name={this.getInputName(this.props.path)}
+				onChange={this.valueChanged}
+				ref="focusTarget"
+				type="url"
+				value={this.props.value}
+			/>
+		);
+	},
+	wrapField () {
+		return (
+			<div style={{ position: 'relative' }}>
+				{this.renderField()}
+				{this.renderLink()}
 			</div>
 		);
 	},
 	renderValue () {
 		const { value } = this.props;
 		return (
-			<div>
-				<FormInput
-					noedit
-					onClick={value && this.openValue}
-					value={value}
-				/>
-				{ this.renderThumb() }
-			</div>
+			<FormInput noedit onClick={value && this.openValue}>
+				{value}
+			</FormInput>
 		);
-	},
-	renderThumb () {
-		const { thumb, value } = this.props;
-		if (thumb === true) {
-			return (
-				<img src={value}/>
-			);
-		}
-		return ('');
 	},
 });

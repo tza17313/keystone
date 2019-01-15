@@ -135,7 +135,7 @@ module.exports.create = function (spec) {
 		mixins: [Mixins.Collapse],
 		statics: {
 			getDefaultValue: function (field) {
-				return typeof field.defaultValue !== 'undefined' ? field.defaultValue : '';
+				return field.defaultValue || '';
 			},
 		},
 		render () {

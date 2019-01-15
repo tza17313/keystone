@@ -1,10 +1,6 @@
-# TextArray Field
+# Textarray Field
 
 Stores an `Array` of `String` values in the model.
-
-```js
-{ type: Types.TextArray }
-```
 
 ## Options
 

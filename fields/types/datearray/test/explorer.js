@@ -1,6 +1,6 @@
 module.exports = {
-	Field: require('../DateArrayField'),
-	Filter: require('../DateArrayFilter'),
+	Field: require('../DatearrayField'),
+	Filter: require('../DatearrayFilter'),
 	section: 'Date',
 	spec: {
 		label: 'Datearray',

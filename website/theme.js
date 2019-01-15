@@ -6,7 +6,7 @@ import { rhythm } from './utils/typography';
 
 // breakpoint
 export const breakpointNumeric = {
-	small: 411,
+	small: 400,
 	medium: 768,
 	large: 1024,
 	xlarge: 1280,
@@ -26,7 +26,7 @@ export const breakpoint = {
 export const container = {
 	small: rhythm(12),
 	medium: rhythm(38),
-	large: rhythm(48),
+	large: rhythm(44),
 };
 
 // color
@@ -34,7 +34,6 @@ export const color = {
 	blue: '#348dd9',
 	blueDark: '#374e61',
 	lightBlue: '#ebf4fb',
-	green: '#0ede6f',
 
 	// experimental
 	orange: '#E59269',

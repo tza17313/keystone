@@ -44,8 +44,7 @@ module.exports = function (req, res) {
 				deletedIds.push(item.id);
 				next();
 			});
-		}, function (err) {
-			if (err) return res.apiError(err);
+		}, function () {
 			return res.json({
 				success: true,
 				ids: deletedIds,
